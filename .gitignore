@@ -37,3 +37,6 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# yml with authentication data and localizations for specific installations
+config.yml
