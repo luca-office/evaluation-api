@@ -1,10 +1,10 @@
 
 FROM rocker/r-ver:3.6.3
 
-LABEL org.label-schema.license="Apache-2.0" \
-      org.label-schema.vcs-url="https://github.com/tmobile/r-tensorflow-api" \
-      org.label-schema.vendor="T-Mobile" \
-      maintainer="Jacqueline Nolis (GitHub @jnolis)"
+LABEL org.label-schema.license="GPL-3.0" \
+      org.label-schema.vcs-url="https://github.com/LucaOffice/evaluation-api" \
+      org.label-schema.vendor="LUCA Office Simulation" \
+      maintainer="Steffen Brandt (GitHub @steffen74)"
       
 # update some packages, including sodium and apache2, then clean
 RUN apt-get update \
