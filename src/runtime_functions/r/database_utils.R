@@ -26,9 +26,9 @@
 #' 
 getDatabaseConnection <- function () {
   config <- config::get()
-  return(dbConnect(RPostgres::Postgres(), dbname = config$db, host=config$db_host, port=config$db_port, user=config$db_user, password=config$db_password))
+  return(RPostgres::dbConnect(RPostgres::Postgres(), dbname = config$db, host=config$db_host, port=config$db_port, user=config$db_user, password=config$db_password))
 }
-  
+
 
 
 #' Get the text of a sent answer email
@@ -60,10 +60,10 @@ getAnswerEmail <- function (invitationId, scenarioId, surveyId) {
   con <- getDatabaseConnection()
   
   # Select all survey events for sent emails for the given person and survey (i.e. project)
-  mail_events <- dbGetQuery(con, paste0("SELECT * FROM survey_event WHERE event_type='SendEmail' AND invitation_id='", invitationId, "' AND survey_id='", surveyId, "';"))
+  mail_events <- RPostgres::dbGetQuery(con, paste0("SELECT * FROM survey_event WHERE event_type='SendEmail' AND invitation_id='", invitationId, "' AND survey_id='", surveyId, "';"))
 
   # Check the data fields of all selected events to find the one with the provided id, which includes the completed answer email
-  payload_list <- lapply(mail_events$data, fromJSON)
+  payload_list <- lapply(mail_events$data, jsonlite::fromJSON)
   answer_mail <- NULL
   for (payload in payload_list) {
     if (payload$scenarioId==scenarioId & payload$isCompletionEmail==TRUE){

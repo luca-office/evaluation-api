@@ -59,7 +59,8 @@ evaluate <- function(functionId=NULL, invitationId=NULL, scenarioId=NULL, survey
     
     #  Calling the function with the text of the mail answer as input argument
     if (substr(functionId, 2, 9)=="_answer_") {
-      py_eval(paste0(functionId, "('", getAnswerEmail(invitationId, scenarioId, surveyID), "')"))
+      print (getwd())
+      py_eval(paste0(functionId, "(\"\"\"", getAnswerEmail(invitationId, scenarioId, surveyId), "\"\"\")"))
     }
   }
   # Checking whether the function is implemented in R
