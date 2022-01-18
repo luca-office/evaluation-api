@@ -1,6 +1,6 @@
 # evaluation-api
 
-A REST API with an endpoint that provides access to different functions implemented in Python or R. Each function/ API call returns a score that a participant achieved for a specific task. Further, a more detailed answer category might be returned and, and in case of probabilistic coding approaches like those based on machine learning models, it also returns a probability for the correctness of the estimated score.
+A REST API providing access to different evaluation functions implemented in Python and R. Each function/ API call returns a score that a participant achieved for a specific task. Further, a more detailed answer category might be returned and, and in case of probabilistic coding approaches like those based on machine learning models, it also returns a probability for the correctness of the estimated score.
 
 In order to use the API and test new function implmentations it is necessary to provide access to a database from an instance of a LUCA Office simulation. Access to a local installation for developing and testing new functions is currently only available on request.
 
