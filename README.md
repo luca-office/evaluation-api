@@ -12,7 +12,7 @@ In order to use the API and test new function implmentations it is necessary to 
 ## Example API Calls
 
 The IP and and port number have to adapted, and the three hash IDs have to be changed according to the values in the considered study.
-Additionally, a valu for the verbosity of the call can be passed on:  
+Additionally, a value for the verbosity of the call can be passed on:  
 `verbose=0`: Only ERROR will be logged  
 `verbose=1`: ERROR and INFO will be logged  
 `verbose=2`: ERROR, INFO, and WARNING will be logged  
