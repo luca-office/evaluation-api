@@ -12,11 +12,11 @@ In order to use the API and test new function implmentations it is necessary to 
 ## Example API Calls
 
 The IP and and port number have to adapted, and the three hash IDs have to be changed according to the values in the considered study.
-Additionally, a valu for the verbosity of the call can be passed on:
+Additionally, a valu for the verbosity of the call can be passed on:  
 `verbose=0`: Only ERROR will be logged  
 `verbose=1`: ERROR and INFO will be logged  
 `verbose=2`: ERROR, INFO, and WARNING will be logged  
-The standard verbose value ist `1`
+The standard verbose value is 1
 
 ### Curl
 curl -X GET "http://127.0.0.1:5876/evaluate?functionId=p_answer_001_mail_politeness&invitationId=cf23f8fe-6a5e-439d-bfe6-33973e9f0092&scenarioId=ed6ea5c0-eb93-4690-b6b8-1ff83ad5e74f&surveyID=f9a8d003-e015-4969-bbdc-3f81298a8b94&verbose=1" -H  "accept: */*"
@@ -25,5 +25,7 @@ curl -X GET "http://127.0.0.1:5876/evaluate?functionId=p_answer_001_mail_politen
 http://127.0.0.1:5876/evaluate?functionId=p_answer_001_mail_politeness&invitationId=cf23f8fe-6a5e-439d-bfe6-33973e9f0092&scenarioId=ed6ea5c0-eb93-4690-b6b8-1ff83ad5e74f&surveyID=f9a8d003-e015-4969-bbdc-3f81298a8b94&verbose=1
 
 ### Response Format
-{"score":[0],"category":[0],"prob":[0.9931]}  
-
+{ "score":[0],  
+  "category":[0],  
+  "probability":[0.9931]  
+}  
