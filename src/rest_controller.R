@@ -26,7 +26,7 @@ for (file_name in file_names) {
 #' 
 #' The endpoint provides access to different functions implemented in Python or R.
 #' Each function returns a score for the participant on a specific task. Further,
-#' it might also return an id vor a specific answer variant, and in case of
+#' it might also return an id for a specific answer category, and in case of
 #' probabilistic approaches like results from machine learning models, it also returns
 #' a probability estimate for the correctness of the score.
 #' 
@@ -34,10 +34,11 @@ for (file_name in file_names) {
 #' @param invitationId The invitation ID
 #' @param scenarioId The scenario ID
 #' @param surveyID The survey ID
-#' @return A list including the elements score, variant, and num
+#' @param verbose An integer of 0, 1, or larger (0: Only ERROR will be logged, 1: ERROR and INFO will be logged, 2: ERROR, INFO, and WARNING will be logged)
+#' @return A list including the elements score, category, and probability
 #' 
 #* @get /evaluate
-evaluate <- function(functionId=NULL, invitationId=NULL, scenarioId=NULL, surveyID=NULL){
+evaluate <- function(functionId=NULL, invitationId=NULL, scenarioId=NULL, surveyID=NULL, verbose=1){
   if (is.null(functionId)) {
     stop("No function Id provided!")
   }
@@ -59,8 +60,7 @@ evaluate <- function(functionId=NULL, invitationId=NULL, scenarioId=NULL, survey
     
     #  Calling the function with the text of the mail answer as input argument
     if (substr(functionId, 2, 9)=="_answer_") {
-      print (getwd())
-      py_eval(paste0(functionId, "(\"\"\"", getAnswerEmail(invitationId, scenarioId, surveyId), "\"\"\")"))
+      eval_result <- py_eval(paste0(functionId, "(\"\"\"", getAnswerEmail(invitationId, scenarioId, surveyId, verbose), "\"\"\", ", verbose,")"))
     }
   }
   # Checking whether the function is implemented in R
@@ -75,5 +75,6 @@ evaluate <- function(functionId=NULL, invitationId=NULL, scenarioId=NULL, survey
       
     }
   }
+  return(eval_result)
 }
 

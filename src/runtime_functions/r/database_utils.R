@@ -42,12 +42,14 @@ getDatabaseConnection <- function () {
 #' @param invitationId The ID of the participant in hash code format
 #' @param scenarioId The scenario ID in hash code format
 #' @param surveyId The survey (or project) ID in hash code format
+#' @verbose Boolean indicating whether additional information shall be logged in the console
 #'
 #' @return A string including the text of the sent answer mail or NULL if no answer mail was encountered
 #' @export
 #'
 #' @examples
 #' # Define the needed arguments
+#' # (Must correspond to actually existing Ids in the LUCA database)
 #' invitationId <- '08eb2f57-e100-40fb-a132-08c1b98f754e'
 #' scenarioId <- '61b65b57-f5d1-4127-8cf2-e611160e9734'
 #' surveyId <- '4eca83df-7e4f-4a0e-b6a5-975bf76f62b4'
@@ -55,11 +57,11 @@ getDatabaseConnection <- function () {
 #' # Call the Function
 #' getAnswerEmail (invitationId, scenarioId, surveyId)
 #' 
-getAnswerEmail <- function (invitationId, scenarioId, surveyId) {
+getAnswerEmail <- function (invitationId, scenarioId, surveyId, verbose=FALSE) {
   # Connect to a LUCA database
   con <- getDatabaseConnection()
   
-  # Select all survey events for sent emails for the given person and survey (i.e. project)
+  # Select all survey events for sent emails for the given person (i.e. invitationId) and survey (corresponds to a project in backoffice terms)
   mail_events <- RPostgres::dbGetQuery(con, paste0("SELECT * FROM survey_event WHERE event_type='SendEmail' AND invitation_id='", invitationId, "' AND survey_id='", surveyId, "';"))
 
   # Check the data fields of all selected events to find the one with the provided id, which includes the completed answer email
@@ -68,14 +70,16 @@ getAnswerEmail <- function (invitationId, scenarioId, surveyId) {
   for (payload in payload_list) {
     if (payload$scenarioId==scenarioId & payload$isCompletionEmail==TRUE){
       answer_mail <- payload$text
-      break;
+      break; # As soon as the first completed answer mail for the given scenarioId is found, it leaves the for loop.
     }
   }
 
 
   #answer_mail <- "Lieber Herr Morgenschön, ich konnte die Aufgabe leider nicht lösen. Viele Grüße!"
   #answer_mail <- NULL
-  print(paste0("The following answer mail will be evaluated:\n", answer_mail, "\n"))
+  if (verbose>0) {
+    print(paste0("Evaluating... \n", answer_mail, "\n"))
+  }
   
   return(answer_mail)
 }
