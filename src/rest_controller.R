@@ -33,12 +33,15 @@ for (file_name in file_names) {
 #' @param functionId The function ID
 #' @param invitationId The invitation ID
 #' @param scenarioId The scenario ID
-#' @param surveyID The survey ID
+#' @param surveyId The survey ID
 #' @param verbose An integer of 0, 1, or larger (0: Only ERROR will be logged, 1: ERROR and INFO will be logged, 2: ERROR, INFO, and WARNING will be logged)
 #' @return A list including the elements score, category, and probability
 #' 
 #* @get /evaluate
-evaluate <- function(functionId=NULL, invitationId=NULL, scenarioId=NULL, surveyID=NULL, verbose=1){
+evaluate <- function(functionId=NULL, invitationId=NULL, scenarioId=NULL, surveyId=NULL, verbose=1){
+  
+  print(paste0("surveyId: ", surveyId))
+  
   if (is.null(functionId)) {
     stop("No function Id provided!")
   }
@@ -48,7 +51,7 @@ evaluate <- function(functionId=NULL, invitationId=NULL, scenarioId=NULL, survey
   if (is.null(scenarioId)) {
     stop("No scenario Id provided!")
   }
-  if (is.null(surveyID)) {
+  if (is.null(surveyId)) {
     stop("No survey Id provided!")
   }
 
