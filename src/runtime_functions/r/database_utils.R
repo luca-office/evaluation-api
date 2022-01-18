@@ -78,7 +78,7 @@ getAnswerEmail <- function (invitationId, scenarioId, surveyId, verbose=FALSE) {
   #answer_mail <- "Lieber Herr Morgenschön, ich konnte die Aufgabe leider nicht lösen. Viele Grüße!"
   #answer_mail <- NULL
   if (verbose>0) {
-    print(paste0("Evaluating... \n", answer_mail, "\n"))
+    print(paste0("Evaluating >>> \n", answer_mail, " <<< "))
   }
   
   return(answer_mail)

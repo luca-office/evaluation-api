@@ -3,6 +3,9 @@ import numpy as np
 
 # Evaluating the politeness of a provided mail text
 def p_answer_001_mail_politeness (mail_text, verbose):
+  
+    if verbose>0:
+        print("using p_answer_001_mail_politeness...", flush=True)
 
     import tensorflow as tf
 
