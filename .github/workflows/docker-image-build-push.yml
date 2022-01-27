@@ -50,8 +50,8 @@ jobs:
           registry: ghcr.io
           #username: ${{ secrets.GHCR_USERNAME }}
           #password: ${{ secrets.GHCR_PASSWORD }}
-          username: steffen74
-          password: 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
+          username: "steffen74"
+          password: "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"
       - 
         name: Build the Docker image
         uses: docker/build-push-action@v2
