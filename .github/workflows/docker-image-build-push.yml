@@ -64,8 +64,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          cache-from: "type=local,src=/tmp/.buildx-cache"
-          cache-to: "type=local,dest=/tmp/.buildx-cache-new"  # TODO: Remove this once it's no longer necessary; see "Move cache" step
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max  # TODO: Remove this once it's no longer necessary; see "Move cache" step
           tags: ${{ steps.meta.outputs.tags }}
           file: ./Dockerfile
       -
