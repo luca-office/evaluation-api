@@ -1,13 +1,13 @@
 name: Build and Publish Docker Image CI
 
 on:
-  release:
-    types:
-      - published
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+#  release:
+#    types:
+#      - published
+#  push:
+#    branches: [ main ]
+#  pull_request:
+#    branches: [ main ]
 
 jobs:
 
