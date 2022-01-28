@@ -1,0 +1,79 @@
+name: Build and Publish Docker Image CI
+
+on:
+#  release:
+#    types:
+#      - published
+#  push:
+#    branches: [ main ]
+#  pull_request:
+#    branches: [ main ]
+
+jobs:
+
+  build:
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    runs-on: ubuntu-latest
+
+    steps:
+      - 
+        name: Check out
+        uses: actions/checkout@v2
+      - 
+        name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          # list of Docker images to use as base name for tags
+          images: |
+            name/app
+            ghcr.io/username/app
+          # generate Docker tags based on the following events/attributes
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
+      -  
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      - 
+        name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v1
+        with:
+          version: latest
+          buildkitd-flags: --debug
+      - 
+        name: Build Docker image
+        uses: docker/build-push-action@v2
+        with:
+          tags: ${{ steps.meta.outputs.tags }}
+          file: ./Dockerfile
+      - 
+        name: Login to GHCR
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - 
+        name: Push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max  # TODO: Remove this once it's no longer necessary; see "Move cache" step
+          tags: ${{ steps.meta.outputs.tags }}
+          file: ./Dockerfile
+      -
+      # TODO: Remove this once it's no longer necessary
+      # https://github.com/docker/build-push-action/issues/252#issuecomment-804898823
+      # https://github.com/docker/build-push-action/issues/252
+      # https://github.com/moby/buildkit/issues/1896
+        name: "Move Docker cache"
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
