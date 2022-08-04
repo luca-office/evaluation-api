@@ -43,7 +43,7 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.2-Linux
 ENV PATH /opt/conda/bin:$PATH
 
 # install all needed python packages using the pip that links to miniconda (the default pip is for python 2.7)
-RUN /opt/conda/bin/conda install tensorflow==2.4.0 h5py==2.10.0 numpy==1.19.2 && \
+RUN /opt/conda/bin/conda install tensorflow==2.4 h5py==2.10.0 numpy==1.19.2 && \
     /opt/conda/bin/conda install -c conda-forge transformers && \
     /opt/conda/bin/conda install importlib-metadata && \
     /opt/conda/bin/conda clean -tipsy
