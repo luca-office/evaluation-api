@@ -47,7 +47,7 @@ RUN /opt/conda/bin/conda install -c conda-forge h5py==3.6.0 numpy==1.22.4 && \
     /opt/conda/bin/conda install -c conda-forge tensorflow=2.9.1 && \
     /opt/conda/bin/conda install -c conda-forge transformers=4.21.0 && \
     /opt/conda/bin/conda install importlib-metadata && \
-    /opt/conda/bin/conda clean -tipsy
+    /opt/conda/bin/conda clean -tipy
 
 # let R know the right version of python to use
 ENV RETICULATE_PYTHON /opt/conda/bin/python
