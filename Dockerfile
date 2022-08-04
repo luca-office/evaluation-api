@@ -1,5 +1,5 @@
 
-FROM rocker/r-ver:3.6.3
+FROM rocker/r-ver:4.2.1
 
 LABEL org.label-schema.license="GPL-3.0" \
       org.label-schema.vcs-url="https://github.com/LucaOffice/evaluation-api" \
@@ -32,7 +32,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/ 
 
 # install miniconda, and set the appropriate path variables.
-# install Python 3.7 (Miniconda) and Tensorflow Python packages then set path variables.
+# install Python 3.9 (Miniconda) and Tensorflow Python packages then set path variables.
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Linux-x86_64.sh -O ~/miniconda.sh && \
     /bin/bash ~/miniconda.sh -b -p /opt/conda && \
     rm ~/miniconda.sh && \
