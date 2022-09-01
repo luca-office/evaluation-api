@@ -57,7 +57,15 @@ getDatabaseConnection <- function () {
 #' # Call the Function
 #' getAnswerEmail (invitationId, scenarioId, surveyId)
 #' 
-getAnswerEmail <- function (invitationId, scenarioId, surveyId, verbose=FALSE) {
+getAnswerEmail <- function (invitationId, scenarioId, surveyId, verbose=1) {
+  
+  # dummy invitation id allowing API testing without database access
+  if (invitationId=="00000"){
+    answer_mail <- "Lieber Herr Morgenschön, ich konnte die Aufgabe leider nicht lösen. Viele Grüße!"
+    print(paste0("Evaluating >>> \nUsing dummy mail answer (without actual database access): ", answer_mail, " <<< "))
+    return(answer_mail)
+  }
+  
   # Connect to a LUCA database
   con <- getDatabaseConnection()
   
@@ -74,9 +82,7 @@ getAnswerEmail <- function (invitationId, scenarioId, surveyId, verbose=FALSE) {
     }
   }
 
-
-  #answer_mail <- "Lieber Herr Morgenschön, ich konnte die Aufgabe leider nicht lösen. Viele Grüße!"
-  #answer_mail <- NULL
+  # print log message with read answer_mail
   if (verbose>0) {
     print(paste0("Evaluating >>> \n", answer_mail, " <<< "))
   }
