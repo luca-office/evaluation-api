@@ -46,6 +46,7 @@ ENV PATH /opt/conda/bin:$PATH
 RUN /opt/conda/bin/conda install -c conda-forge h5py==3.6.0 numpy==1.22.4 && \
     /opt/conda/bin/conda install -c conda-forge tensorflow=2.9.1 && \
     /opt/conda/bin/conda install -c conda-forge transformers=4.21.0 && \
+    /opt/conda/bin/conda install -c conda-forge libgcc=7.2.0 && \
     /opt/conda/bin/conda install importlib-metadata && \
     /opt/conda/bin/conda clean -tipy
 
