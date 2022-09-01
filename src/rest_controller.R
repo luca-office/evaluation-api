@@ -38,26 +38,11 @@ for (file_name in file_names) {
 #' @return A list including the elements score, category, and probability
 #' 
 #* @get /evaluate
-evaluate <- function(functionId=NULL, invitationId=NULL, scenarioId=NULL, surveyId=NULL, verbose=1){
+evaluate <- function(functionId, invitationId=NULL, scenarioId=NULL, surveyId=NULL, verbose=1){
   
-  print(paste0("surveyId: ", surveyId))
-  
-  if (is.null(functionId)) {
-    stop("No function Id provided!")
-  }
-  if (is.null(invitationId)) {
-    stop("No invitation Id provided!")
-  }
-  if (is.null(scenarioId)) {
-    stop("No scenario Id provided!")
-  }
-  if (is.null(surveyId)) {
-    stop("No survey Id provided!")
-  }
 
-    
-  # Checking whether the function is implemented in Python
-  if (substr(functionId, 1, 1)=="p") {
+    # Checking whether the function is implemented in Python
+  if (substr(functionId, 1, 2)=="p_") {
     
     # TODO Check whether the function exists before moving on
     
@@ -67,7 +52,7 @@ evaluate <- function(functionId=NULL, invitationId=NULL, scenarioId=NULL, survey
     }
   }
   # Checking whether the function is implemented in R
-  else if (substr(functionId, 1, 1)=="r") {
+  else if (substr(functionId, 1, 2)=="r_") {
     
     # TODO Check whether the function exists before moving on
     
@@ -76,7 +61,10 @@ evaluate <- function(functionId=NULL, invitationId=NULL, scenarioId=NULL, survey
       
       # TODO Implement an examplary function call for R
       
+    } else {
+      eval_result <- do.call(functionId, list(invitationId, scenarioId, surveyId, verbose))
     }
+    
   }
   return(eval_result)
 }
