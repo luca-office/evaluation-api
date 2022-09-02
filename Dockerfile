@@ -1,5 +1,5 @@
 
-FROM rocker/r-ver:3.6.3
+FROM rocker/r-ver:4.0.5
 
 LABEL org.label-schema.license="GPL-3.0" \
       org.label-schema.vcs-url="https://github.com/LucaOffice/evaluation-api" \
