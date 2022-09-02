@@ -1,5 +1,5 @@
 
-FROM rocker/r-ver:4.2.1
+FROM rocker/r-ver:3.6.3
 
 LABEL org.label-schema.license="GPL-3.0" \
       org.label-schema.vcs-url="https://github.com/LucaOffice/evaluation-api" \
@@ -22,10 +22,10 @@ RUN apt-get update \
     libssh2-1-dev \
     ca-certificates \
     libglib2.0-0 \
-	libxext6 \
-	libsm6  \
-	libxrender1 \
-	bzip2 \
+  	libxext6 \
+  	libsm6  \
+  	libxrender1 \
+  	bzip2 \
     apache2 \
     zlib1g-dev \
     && apt-get clean \
@@ -46,7 +46,6 @@ ENV PATH /opt/conda/bin:$PATH
 RUN /opt/conda/bin/conda install -c conda-forge h5py==3.6.0 numpy==1.22.4 && \
     /opt/conda/bin/conda install -c conda-forge tensorflow=2.9.1 && \
     /opt/conda/bin/conda install -c conda-forge transformers=4.21.0 && \
-    /opt/conda/bin/conda install -c conda-forge libgcc=7.2.0 && \
     /opt/conda/bin/conda install importlib-metadata && \
     /opt/conda/bin/conda clean -tipy
 
