@@ -24,6 +24,7 @@ RUN apt-get update \
     libglib2.0-0 \
   	libxext6 \
   	libsm6  \
+  	libsodium-dev \
   	libxrender1 \
   	bzip2 \
     apache2 \
