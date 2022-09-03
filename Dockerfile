@@ -45,7 +45,7 @@ ENV PATH /opt/conda/bin:$PATH
 # install all needed python packages using the pip that links to miniconda (the default pip is for python 2.7)
 RUN /opt/conda/bin/conda install -c conda-forge h5py==3.6.0 numpy==1.22.4 && \
     /opt/conda/bin/conda install -c conda-forge tensorflow=2.6 && \
-    /opt/conda/bin/conda install -c conda-forge transformers=4.21.0 && \
+    /opt/conda/bin/conda install -c conda-forge transformers=4.10 && \
     /opt/conda/bin/conda install importlib-metadata && \
     /opt/conda/bin/conda clean -tipy
 
