@@ -1,5 +1,5 @@
 
-FROM rocker/r-ver:4.0.5
+FROM rocker/r-ver:4.2.1
 
 LABEL org.label-schema.license="GPL-3.0" \
       org.label-schema.vcs-url="https://github.com/LucaOffice/evaluation-api" \
@@ -44,7 +44,7 @@ ENV PATH /opt/conda/bin:$PATH
 
 # install all needed python packages using the pip that links to miniconda (the default pip is for python 2.7)
 RUN /opt/conda/bin/conda install -c conda-forge h5py==3.6.0 numpy==1.22.4 && \
-    /opt/conda/bin/conda install -c conda-forge tensorflow=2.9.1 && \
+    /opt/conda/bin/conda install -c conda-forge tensorflow=2.6 && \
     /opt/conda/bin/conda install -c conda-forge transformers=4.21.0 && \
     /opt/conda/bin/conda install importlib-metadata && \
     /opt/conda/bin/conda clean -tipy
