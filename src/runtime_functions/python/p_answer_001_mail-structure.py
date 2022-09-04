@@ -36,9 +36,13 @@ def p_answer_001_mail_politeness (mail_text, verbose):
 
     # Getting the tokenizer for the defined model
     from transformers import AutoTokenizer
+    from transformers import AutoConfig
     #tokenizer = AutoTokenizer.from_pretrained(checkpoint)
     #tokenizer.save_pretrained("src/runtime_functions/python/hf_tokenizer_deepset-gbert-base")
-    tokenizer = AutoTokenizer.from_pretrained("runtime_functions/python/hf_tokenizer_deepset-gbert-base")
+    
+    # AutoTokenizer needs to be accompanied by the model config to work correctly
+    from transformers import AutoConfig
+    tokenizer = AutoTokenizer.from_pretrained("runtime_functions/python/hf_tokenizer_deepset-gbert-base", config=AutoConfig.from_pretrained("runtime_functions/python/hf_model_a4s_i2b.tf"))
 
     # Getting the encodings (as tensors for tensorflow) for the texts for training, validation, and testing
     text_encodings = dict(tokenizer(mail_text, padding=True, truncation=True, return_tensors='np'))
