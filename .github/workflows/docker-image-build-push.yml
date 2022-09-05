@@ -25,8 +25,13 @@ jobs:
 
     steps:
       - 
-        name: Check out
+        name: Checkout GitHub repo and LFS dependencies
         uses: actions/checkout@v2
+        with:
+          lfs: true
+      -    
+        name: Checkout LFS objects
+        run: git lfs checkout
       - 
         name: Build Docker image
         run: docker build . --file Dockerfile --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
