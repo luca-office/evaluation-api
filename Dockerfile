@@ -10,8 +10,6 @@ LABEL org.label-schema.license="GPL-3.0" \
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     file \
-    git \
-    git-lfs \
     libcurl4-openssl-dev \
     libedit2 \
     libssl-dev \
