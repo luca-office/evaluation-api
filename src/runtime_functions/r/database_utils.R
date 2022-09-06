@@ -62,7 +62,7 @@ getAnswerEmail <- function (invitationId, scenarioId, surveyId, verbose=1) {
   # dummy invitation id allowing API testing without database access
   if (invitationId=="00000"){
     answer_mail <- "Lieber Herr Morgenschön, ich konnte die Aufgabe leider nicht lösen. Viele Grüße!"
-    print(paste0("Evaluating >>> \nUsing dummy mail answer (without actual database access): ", answer_mail, " <<< "))
+    print(paste0("Evaluating >>> [Using dummy mail answer without actual database access:] ", answer_mail, " <<< "))
     return(answer_mail)
   }
   
