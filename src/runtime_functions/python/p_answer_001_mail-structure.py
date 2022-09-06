@@ -4,13 +4,13 @@ import tensorflow as tf
 
 
 # Criterion specific functions to evaluate the politeness of a provided mail text
-def p_answer_001_mail_politeness_c0 (mail_text, verbose, criterion_threshold=.95):
-    return(p_answer_001_mail_politeness (mail_text, 0, verbose, criterion_threshold))
-def p_answer_001_mail_politeness_c1 (mail_text, verbose, criterion_threshold=.95):
-    return(p_answer_001_mail_politeness (mail_text, 1, verbose, criterion_threshold))
+def p_answer_001_politeness_c0 (mail_text, verbose, criterion_threshold=.95):
+    return(p_answer_001_politeness (mail_text, 0, verbose, criterion_threshold))
+def p_answer_001_politeness_c1 (mail_text, verbose, criterion_threshold=.95):
+    return(p_answer_001_politeness (mail_text, 1, verbose, criterion_threshold))
 
 # Basic function to evaluate the politeness of a provided mail text
-def p_answer_001_mail_politeness (mail_text, criterion_no, verbose, criterion_threshold=.95):
+def p_answer_001_politeness (mail_text, criterion_no, verbose, criterion_threshold=.95):
   
     # Definition for the response object
     function_name= "p_answer_001_mail_politeness"
