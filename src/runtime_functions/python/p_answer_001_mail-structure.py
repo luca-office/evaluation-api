@@ -1,13 +1,22 @@
 # Basic function libraries
 import numpy as np
+import tensorflow as tf
 
-# Evaluating the politeness of a provided mail text
-def p_answer_001_mail_politeness (mail_text, verbose):
+
+# Criterion specific functions to evaluate the politeness of a provided mail text
+def p_answer_001_mail_politeness_c0 (mail_text, verbose, criterion_threshold=.95):
+    return(p_answer_001_mail_politeness (mail_text, 0, verbose, criterion_threshold))
+def p_answer_001_mail_politeness_c1 (mail_text, verbose, criterion_threshold=.95):
+    return(p_answer_001_mail_politeness (mail_text, 1, verbose, criterion_threshold))
+
+# Basic function to evaluate the politeness of a provided mail text
+def p_answer_001_mail_politeness (mail_text, criterion_no, verbose, criterion_threshold=.95):
+  
+    # Definition for the response object
+    function_name= "p_answer_001_mail_politeness"
   
     if verbose>0:
-        print("using p_answer_001_mail_politeness...", flush=True)
-
-    import tensorflow as tf
+        print("using p_answer_001_mail_politeness_c"+str(criterion_no)+"...", flush=True)
 
     ###  
     # Hugging Face transformer logging status codes
@@ -36,7 +45,6 @@ def p_answer_001_mail_politeness (mail_text, verbose):
 
     # Getting the tokenizer for the defined model
     from transformers import AutoTokenizer
-    from transformers import AutoConfig
     #tokenizer = AutoTokenizer.from_pretrained(checkpoint)
     #tokenizer.save_pretrained("src/runtime_functions/python/hf_tokenizer_deepset-gbert-base")
     
@@ -56,17 +64,27 @@ def p_answer_001_mail_politeness (mail_text, verbose):
     # Calculation of the probabilities for each class
     # There is no softmax layer at the top of the models in Hugging Face, therefore
     # the probabilities have to be calculated here using the softmax function
-    text_pred_prob = tf.nn.softmax(model.predict(dict(text_encodings))['logits'])
+    predicted_probabilities = tf.nn.softmax(model.predict(dict(text_encodings))['logits'])
+    
+    criterion_probability = tf.get_static_value(predicted_probabilities[0,criterion_no])
+    
+    if criterion_probability > criterion_threshold:
+        criterion_prediction = "fulfilled"
+    elif criterion_probability < (1-criterion_threshold):
+        criterion_prediction = "not_fulfilled"
+    else:
+        criterion_prediction = "undefined"
 
-    # Extraction of the class number with the highest probability
-    text_pred_class = np.argmax(text_pred_prob, axis=1)
-
-    answer = {
-        "score": text_pred_class[0],
-        "category": text_pred_class[0],
-        "probability": tf.get_static_value(text_pred_prob[0,text_pred_class[0]])
+    response = {
+        "function_name": function_name,
+        "criterion_no": criterion_no,
+        "criterion_prediction": criterion_prediction,
+        "criterion_probability": criterion_probability,
+        "criterion_threshold": criterion_threshold,
+        "data": ""
     }
     if verbose>0:
-        print("...Result: ",answer, flush=True)
-        
-    return(answer)
+        print("...Result: ",response, flush=True)
+
+
+    return(response)
