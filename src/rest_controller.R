@@ -38,6 +38,7 @@ for (file_name in file_names) {
 #' @return A list including the elements score, category, and probability
 #' 
 #* @get /evaluate
+#* @serializer unboxedJSON
 evaluate <- function(functionId, invitationId=NULL, scenarioId=NULL, surveyId=NULL, verbose=1){
   
 
