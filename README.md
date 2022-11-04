@@ -25,7 +25,10 @@ curl -X GET "http://127.0.0.1:5876/evaluate?functionId=p_answer_001_mail_politen
 http://127.0.0.1:5876/evaluate?functionId=p_answer_001_mail_politeness&invitationId=cf23f8fe-6a5e-439d-bfe6-33973e9f0092&scenarioId=ed6ea5c0-eb93-4690-b6b8-1ff83ad5e74f&surveyID=f9a8d003-e015-4969-bbdc-3f81298a8b94&verbose=1
 
 ### Response Format
-{ "score":[0],  
-  "category":[0],  
-  "probability":[0.9931]  
+{ "function_name": String,  
+  "criterion_no": Int,  
+  "criterion_prediction": "fulfilled" | "not_fulfilled" | "undefined",
+  "criterion_probability": BigDecimal,
+  "criterion_threshold": BigDecimal,
+  "data": String
 }  
