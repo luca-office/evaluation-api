@@ -27,8 +27,8 @@ http://127.0.0.1:5876/evaluate?functionId=p_answer_001_mail_politeness&invitatio
 ### Response Format
 { "function_name": String,  
   "criterion_no": Int,  
-  "criterion_prediction": "fulfilled" | "not_fulfilled" | "undefined",
-  "criterion_probability": BigDecimal,
-  "criterion_threshold": BigDecimal,
-  "data": String
+  "criterion_prediction": "fulfilled" | "not_fulfilled" | "undefined",  
+  "criterion_probability": BigDecimal,  
+  "criterion_threshold": BigDecimal,  
+  "data": String  
 }  
