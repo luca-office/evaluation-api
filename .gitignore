@@ -40,3 +40,6 @@ vignettes/*.pdf
 
 # yml with authentication data and localizations for specific installations
 config.yml
+
+# User-specific development files
+/src/dev*
